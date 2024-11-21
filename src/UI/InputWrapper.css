@@ -1,0 +1,30 @@
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: flex-start;
+    gap: .5rem;
+}
+.flex-row{
+    display: flex;
+}
+.input-wrapper.flex-row{
+    flex-direction: row;
+    gap: 2rem;
+}
+.radio-wrapper, .radio-wrapper>div{
+    display: flex;
+    gap: 3rem;
+}
+.radio-wrapper>div{
+    align-items: center;
+    gap: .5rem;
+}
+.input-wrapper>label{
+    order: 1;
+    /* letter-spacing: .5px; */
+    color: #535c68;
+}
+.input-wrapper>input, .input-wrapper>span, .input-wrapper>textarea, .input-wrapper>div:not(#isSubscribed){
+    order: 2;
+}
