@@ -4,12 +4,29 @@ import { PrimeReactProvider } from "primereact/api";
 import { Provider } from "react-redux";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { store } from "./store/store";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Root from "./pages/Root";
+import Success from "./pages/Success";
+
+const Router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        index: true,
+        element: <Regsitration />,
+      },
+      { path: "success", element: <Success /> },
+    ],
+  },
+]);
 
 function App() {
   return (
     <Provider store={store}>
       <PrimeReactProvider>
-        <Regsitration></Regsitration>
+        <RouterProvider router={Router} />
       </PrimeReactProvider>
     </Provider>
   );

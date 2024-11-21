@@ -13,20 +13,22 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { addNewUser } from "../store/user-slice";
 import { useUserDispatch } from "../store/hooks";
 import "./Registration.css";
+import { useNavigate } from "react-router-dom";
 
-export interface IFormInput {
+export type IFormInput = {
   firstName: string;
   isSubscribed: boolean;
   dob: Date;
   contact: number;
   address: string;
   gender: string;
-}
+};
 
 const Regsitration = () => {
   const dispatch = useUserDispatch();
+  const navigate = useNavigate();
 
-  const [isChecked, setChecked] = useState<boolean>(true);
+  const [isChecked, setChecked] = useState<boolean>(false);
   const [date, setDate] = useState<Nullable<Date>>();
   const [number, setNumber] = useState<number | null>();
   const [address, setAddress] = useState<string>("");
@@ -58,21 +60,29 @@ const Regsitration = () => {
     setAddress("");
     setDate(null);
     reset();
-  }
+  };
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-    dispatch(addNewUser(data));
+    // console.log(data);
+    const newDate = {
+      ...data,
+      dob: data.dob.toString(),
+    };
+    dispatch(addNewUser(newDate));
+    navigate("/success");
     resetValues();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <h1>User Registration</h1>
       <InputWrapper flowAlongRow={false}>
         <Controller
           name="firstName"
           control={control}
-          render={({ field }) => <InputText required id="firstName" {...field} />}
+          render={({ field }) => (
+            <InputText required id="firstName" {...field} />
+          )}
         />
         <label htmlFor="firstName">Username</label>
       </InputWrapper>
