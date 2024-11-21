@@ -5,7 +5,6 @@ import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
 import InputWrapper from "../UI/InputWrapper";
-import { Nullable } from "primereact/ts-helpers";
 import { RadioButton } from "primereact/radiobutton";
 import { InputTextarea } from "primereact/inputtextarea";
 
@@ -142,12 +141,11 @@ const Regsitration = () => {
               {...field}
               required
               value={address}
+              
               onChange={(e) => {
                 setAddress(e.target.value);
                 setValue("address", e.target.value);
               }}
-              rows={5}
-              cols={30}
             />
           )}
         />

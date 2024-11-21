@@ -2,7 +2,7 @@ import { useUserSelector } from "../store/hooks";
 import { Link } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react"; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
-import "ag-grid-community/styles/ag-theme-material.css";
+import "ag-grid-community/styles/ag-theme-quartz.css";
 import { ColDef } from "ag-grid-community";
 import "./success.css";
 import { User } from "../store/user-slice";
@@ -37,7 +37,7 @@ export default function Success() {
       </div>
       <h1 className="users-heading">Registered Users</h1>
       <div className="users">
-        <div className="table ag-theme-material">
+        <div className="table ag-theme-quartz">
           <AgGridReact
             rowData={users}
             columnDefs={colDefs}
