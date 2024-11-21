@@ -7,6 +7,7 @@ import { store } from "./store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./pages/Root";
 import Success from "./pages/Success";
+import 'remixicon/fonts/remixicon.css'
 
 const Router = createBrowserRouter([
   {

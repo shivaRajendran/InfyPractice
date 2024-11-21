@@ -6,7 +6,6 @@ import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
 import InputWrapper from "../UI/InputWrapper";
 import { Nullable } from "primereact/ts-helpers";
-import { InputNumber } from "primereact/inputnumber";
 import { RadioButton } from "primereact/radiobutton";
 import { InputTextarea } from "primereact/inputtextarea";
 
@@ -19,7 +18,7 @@ export type IFormInput = {
   firstName: string;
   isSubscribed: boolean;
   dob: Date;
-  contact: number;
+  contact: string;
   address: string;
   gender: string;
 };
@@ -28,9 +27,6 @@ const Regsitration = () => {
   const dispatch = useUserDispatch();
   const navigate = useNavigate();
 
-  const [isChecked, setChecked] = useState<boolean>(false);
-  const [date, setDate] = useState<Nullable<Date>>();
-  const [number, setNumber] = useState<number | null>();
   const [address, setAddress] = useState<string>("");
   const [gender, setGender] = useState<"male" | "female" | null>();
   let today = new Date();
@@ -43,34 +39,21 @@ const Regsitration = () => {
   maxDate.setMonth(month);
   maxDate.setFullYear(year);
 
-  const { control, handleSubmit, setValue, getValues, reset } = useForm({
-    defaultValues: {
-      firstName: "",
-      isSubscribed: true,
-      dob: today,
-      contact: 0,
-      address: "",
-      gender: "",
-    },
-  });
+  const { control, handleSubmit, setValue, reset } = useForm<IFormInput>();
 
-  const resetValues = () => {
-    setNumber(null);
-    setGender(null);
-    setAddress("");
-    setDate(null);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data);
+    const newData = {
+      ...data,
+      dob: data.dob.toLocaleDateString("en-GB"),
+    };
+    dispatch(addNewUser(newData));
+    navigate("/success");
     reset();
   };
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    // console.log(data);
-    const newDate = {
-      ...data,
-      dob: data.dob.toString(),
-    };
-    dispatch(addNewUser(newDate));
-    navigate("/success");
-    resetValues();
+  const restrictToNumbers = (value: string) => {
+    return value.replace(/[^0-9]/g, "");
   };
 
   return (
@@ -81,7 +64,7 @@ const Regsitration = () => {
           name="firstName"
           control={control}
           render={({ field }) => (
-            <InputText required id="firstName" {...field} />
+            <InputText required id="firstName" {...field} value={field.value} />
           )}
         />
         <label htmlFor="firstName">Username</label>
@@ -91,19 +74,14 @@ const Regsitration = () => {
         <Controller
           name="contact"
           control={control}
+          defaultValue=""
           render={({ field }) => (
-            <InputNumber
-              {...field}
-              required
-              useGrouping={false}
-              value={number}
+            <InputText
               id="contact"
-              onValueChange={(e) => {
-                if ("value" in e && typeof e.value === "number") {
-                  setValue("contact", e.value);
-                  setNumber(e.value);
-                }
-              }}
+              value={field.value}
+              onChange={(e) =>
+                field.onChange(restrictToNumbers(e.target.value))
+              }
             />
           )}
         />
@@ -179,22 +157,17 @@ const Regsitration = () => {
       <InputWrapper flowAlongRow={false}>
         <Controller
           name="dob"
+          defaultValue={new Date()}
           control={control}
           render={({ field }) => (
             <Calendar
               {...field}
-              onChange={(e) => {
-                if ("value" in e && e.value instanceof Date) {
-                  setValue("dob", e.value);
-                  setDate(getValues("dob"));
-                }
-                // onDateChange();
-              }}
+              value={field.value}
+              onChange={(e) => field.onChange(e.value)}
               locale="en"
               required
               maxDate={maxDate}
               id="dob"
-              value={date}
               showIcon
             />
           )}
@@ -205,18 +178,14 @@ const Regsitration = () => {
         <Controller
           name="isSubscribed"
           control={control}
+          defaultValue={false}
           render={({ field }) => (
             <Checkbox
-              {...field}
-              // onChange={onCheckBoxChange}
-              onChange={(e) => {
-                let state = e.checked ? e.checked : false;
-                setValue("isSubscribed", state);
-                setChecked(state);
-              }}
-              checked={isChecked}
+              inputId="isSubscribed"
               id="isSubscribed"
-            ></Checkbox>
+              checked={field.value}
+              onChange={(e) => field.onChange(e.checked)}
+            />
           )}
         />{" "}
         <label htmlFor="isSubscribed">

@@ -3,7 +3,7 @@ import { IFormInput } from "../components/Registration";
 
 type userBase = IFormInput;
 
-type User = Omit<userBase, "dob"> & { dob: string };
+export type User = Omit<userBase, "dob"> & { dob: string};
 
 type UserState = {
   users: User[];

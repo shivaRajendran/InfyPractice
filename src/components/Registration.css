@@ -8,6 +8,8 @@ form {
 }
 h1 {
   text-align: center;
+  color: #05B6D3;
+  font-weight: 400;
 }
 
 @media (max-width: 768px) {
