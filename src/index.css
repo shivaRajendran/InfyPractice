@@ -7,6 +7,11 @@
   user-select: none;
 }
 
+:root {
+  --primary-color: #ff5722; /* Change to your desired accent color */
+  --primary-color-text: #ffffff; /* Text color on primary backgrounds */
+}
+
 body{
   padding: 0;
   margin: 0;

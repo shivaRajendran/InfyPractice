@@ -9,7 +9,7 @@
     margin: 0;
     /* padding: 2rem; */
     font-size: 3rem;
-    color: #05B6D3;
+    /* color: #05B6D3; */
     font-weight: 400;
     display: flex;
     gap: 2rem;
@@ -31,10 +31,13 @@
 .users-heading{
     text-align: left;
     padding: 2rem;
-    color: #000;
+    /* color: #000; */
+}
+.p-message, .p-message-wrapper{
+    width: 100%;
 }
 .table{
-    height: 700px;
+    height: 400px;
     padding: 2rem;
 }
 @media (max-width: 600px){

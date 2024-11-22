@@ -3,7 +3,7 @@
     flex-direction: column;
     /* align-items: center; */
     justify-content: flex-start;
-    gap: .5rem;
+    gap: .8rem;
 }
 .flex-row{
     display: flex;
@@ -23,7 +23,7 @@
 .input-wrapper>label{
     order: 1;
     /* letter-spacing: .5px; */
-    color: #535c68;
+    /* color: #535c68; */
 }
 .input-wrapper>input, .input-wrapper>span, .input-wrapper>textarea, .input-wrapper>div:not(#isSubscribed){
     order: 2;

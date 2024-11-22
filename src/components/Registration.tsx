@@ -25,6 +25,7 @@ export type IFormInput = {
 const Regsitration = () => {
   const dispatch = useUserDispatch();
   const navigate = useNavigate();
+  const [validation] = useState<boolean>(false);
 
   const [address, setAddress] = useState<string>("");
   const [gender, setGender] = useState<"male" | "female" | null>();
@@ -63,7 +64,12 @@ const Regsitration = () => {
           name="firstName"
           control={control}
           render={({ field }) => (
-            <InputText required id="firstName" {...field} value={field.value} />
+            <InputText
+              required={validation}
+              id="firstName"
+              {...field}
+              value={field.value}
+            />
           )}
         />
         <label htmlFor="firstName">Username</label>
@@ -76,6 +82,7 @@ const Regsitration = () => {
           defaultValue=""
           render={({ field }) => (
             <InputText
+              required={validation}
               id="contact"
               value={field.value}
               onChange={(e) =>
@@ -98,7 +105,7 @@ const Regsitration = () => {
                   {...field}
                   inputId="male"
                   name="gender"
-                  required
+                  required={validation}
                   value="male"
                   onChange={(e) => {
                     setGender(e.value);
@@ -139,9 +146,8 @@ const Regsitration = () => {
           render={({ field }) => (
             <InputTextarea
               {...field}
-              required
+              required={validation}
               value={address}
-              
               onChange={(e) => {
                 setAddress(e.target.value);
                 setValue("address", e.target.value);
@@ -163,7 +169,7 @@ const Regsitration = () => {
               value={field.value}
               onChange={(e) => field.onChange(e.value)}
               locale="en"
-              required
+              required={validation}
               maxDate={maxDate}
               id="dob"
               showIcon

@@ -2,7 +2,7 @@
 import Regsitration from "./components/Registration";
 import { PrimeReactProvider } from "primereact/api";
 import { Provider } from "react-redux";
-import "primereact/resources/themes/lara-light-cyan/theme.css";
+import "primereact/resources/themes/tailwind-light/theme.css";
 import { store } from "./store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./pages/Root";
