@@ -39,7 +39,7 @@ div[data-pc-name="messages"] {
   width: 100%;
 }
 .table {
-  height: 400px;
+  height: 300px;
   padding: 2rem;
 }
 @media (max-width: 600px) {

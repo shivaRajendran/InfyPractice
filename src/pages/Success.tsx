@@ -43,7 +43,7 @@ export default function Success() {
     },
   ]);
   const defaultColumnDef = useMemo(() => {
-    return { flex: 1, filter: true };
+    return { flex: .5, filter: true };
   }, []);
   return (
     <>

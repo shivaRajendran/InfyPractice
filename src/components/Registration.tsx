@@ -19,33 +19,30 @@ export type IFormInput = {
   dob: Date;
   contact: string;
   address: string;
-  gender: string;
+  gender: "Male" | "Female";
 };
 
 const Regsitration = () => {
   const dispatch = useUserDispatch();
   const navigate = useNavigate();
-  const [validation] = useState<boolean>(false);
+  const [validation] = useState<boolean>(true);
 
   const [address, setAddress] = useState<string>("");
-  const [gender, setGender] = useState<"male" | "female" | null>();
-  let today = new Date();
-  let todayDate = today.getDate();
-  let month = today.getMonth();
-  let year = today.getFullYear();
+  const [gender, setGender] = useState<"male" | "female">();
 
+  let today = new Date();
   let maxDate = new Date();
-  maxDate.setDate(todayDate);
-  maxDate.setMonth(month);
-  maxDate.setFullYear(year);
+
+  maxDate.setDate(today.getDate());
+  maxDate.setMonth(today.getMonth());
+  maxDate.setFullYear(today.getFullYear());
 
   const { control, handleSubmit, setValue, reset } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
     const newData = {
       ...data,
-      dob: data.dob.toLocaleDateString("en-GB"),
+      dob: data.dob.toLocaleDateString("en-GB") + ""
     };
     dispatch(addNewUser(newData));
     navigate("/success");
@@ -106,10 +103,10 @@ const Regsitration = () => {
                   inputId="male"
                   name="gender"
                   required={validation}
-                  value="male"
+                  value="Male"
                   onChange={(e) => {
                     setGender(e.value);
-                    setValue("gender", "male");
+                    setValue("gender", "Male");
                   }}
                   checked={gender === "male"}
                 />
@@ -122,10 +119,10 @@ const Regsitration = () => {
                   {...field}
                   inputId="female"
                   name="gender"
-                  value="female"
+                  value="Female"
                   onChange={(e) => {
                     setGender(e.value);
-                    setValue("gender", "female");
+                    setValue("gender", "Female");
                   }}
                   checked={gender === "female"}
                 />

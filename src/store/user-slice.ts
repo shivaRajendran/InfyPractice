@@ -1,16 +1,16 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { IFormInput } from "../components/Registration";
+import dummyData from "./DummyData";
 
 type userBase = IFormInput;
 
-export type User = Omit<userBase, "dob"> & { dob: string};
+export type User = Omit<userBase, "dob"> & {dob: string};
 
 type UserState = {
   users: User[];
 };
-
 const initialState: UserState = {
-  users: [],
+  users: dummyData
 };
 
 export const userSlice = createSlice({
