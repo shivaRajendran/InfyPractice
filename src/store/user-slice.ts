@@ -10,7 +10,7 @@ type UserState = {
   users: User[];
 };
 const initialState: UserState = {
-  users: dummyData
+  users: []
 };
 
 export const userSlice = createSlice({

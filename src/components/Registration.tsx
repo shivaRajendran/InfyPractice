@@ -25,10 +25,9 @@ export type IFormInput = {
 const Regsitration = () => {
   const dispatch = useUserDispatch();
   const navigate = useNavigate();
-  const [validation] = useState<boolean>(true);
+  const [validation] = useState<boolean>(false);
 
   const [address, setAddress] = useState<string>("");
-  const [gender, setGender] = useState<"male" | "female">();
 
   let today = new Date();
   let maxDate = new Date();
@@ -40,6 +39,7 @@ const Regsitration = () => {
   const { control, handleSubmit, setValue, reset } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data);
     const newData = {
       ...data,
       dob: data.dob.toLocaleDateString("en-GB") + ""
@@ -105,10 +105,9 @@ const Regsitration = () => {
                   required={validation}
                   value="Male"
                   onChange={(e) => {
-                    setGender(e.value);
-                    setValue("gender", "Male");
+                    field.onChange(e.value);
                   }}
-                  checked={gender === "male"}
+                  checked={field.value === "Male"}
                 />
                 <label htmlFor="male" className="ml-2">
                   Male
@@ -121,10 +120,9 @@ const Regsitration = () => {
                   name="gender"
                   value="Female"
                   onChange={(e) => {
-                    setGender(e.value);
-                    setValue("gender", "Female");
+                    field.onChange(e.value);
                   }}
-                  checked={gender === "female"}
+                  checked={field.value === "Female"}
                 />
                 <label htmlFor="female" className="ml-2">
                   Female
