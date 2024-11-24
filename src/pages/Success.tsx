@@ -56,7 +56,7 @@ export default function Success() {
       </div>
       <h1 className="users-heading">Registered Users</h1>
       <div className="users">
-        <div className="table ag-theme-quartz">
+        <div className="table ag-theme-quartz-dark">
           <AgGridReact
             rowData={users}
             columnDefs={colDefs}

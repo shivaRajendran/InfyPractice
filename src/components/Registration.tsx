@@ -25,7 +25,7 @@ export type IFormInput = {
 const Regsitration = () => {
   const dispatch = useUserDispatch();
   const navigate = useNavigate();
-  const [validation] = useState<boolean>(false);
+  const [validation] = useState<boolean>(true);
 
   const [address, setAddress] = useState<string>("");
 

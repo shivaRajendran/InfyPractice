@@ -2,7 +2,7 @@
 import Regsitration from "./components/Registration";
 import { PrimeReactProvider } from "primereact/api";
 import { Provider } from "react-redux";
-import "primereact/resources/themes/md-light-indigo/theme.css";
+import "primereact/resources/themes/bootstrap4-dark-blue/theme.css";
 import { store } from "./store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./pages/Root";
